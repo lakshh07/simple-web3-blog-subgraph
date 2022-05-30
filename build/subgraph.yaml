@@ -1,0 +1,28 @@
+specVersion: 0.0.4
+schema:
+  file: schema.graphql
+features:
+  - fullTextSearch
+  - ipfsOnEthereumContracts
+dataSources:
+  - kind: ethereum
+    name: undefined
+    network: mumbai
+    source:
+      address: "0x07F2F5573F17F0Fd794E19E71E6D8594C9769530"
+      abi: Blog
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Post
+      abis:
+        - name: Blog
+          file: undefined/abis/Blog.json
+      eventHandlers:
+        - event: PostCreated(uint256,string,string)
+          handler: handlePostCreated
+        - event: PostUpdated(uint256,string,string,bool)
+          handler: handlePostUpdated
+      file: undefined/undefined.wasm
